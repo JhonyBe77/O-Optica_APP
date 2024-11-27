@@ -35,10 +35,12 @@ app.use(express.json());
 // Rutas
 
 const userRoutes = require("./routes/user.routes")
+const monturaRoutes = require("./routes/montura.routes")
 
 // Habilitacion de rutas
 
 app.use('/user',userRoutes);
+app.use('/montura',monturaRoutes);
 
 
 // app.use("*", manage404);
