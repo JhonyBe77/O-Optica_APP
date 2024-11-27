@@ -1,4 +1,4 @@
-const queries = require('../queries/user.queries') // Queries SQL
+const queries = require('../queries/monturas.queries') // Queries SQL
 const pool = require('../config/db_pgsql')
 
 const getAllMonturas = async () => {
@@ -14,10 +14,33 @@ const getAllMonturas = async () => {
         client.release();
     }
     return result
-}
+};
+//isertar en base de datos
+const insertMonturas = async (monturas) => {
+    const query = `
+        INSERT INTO monturas (name, price, img, color, description_summary)
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING *;
+    `;
+    const resultados = [];
+    const client = await pool.connect();
+    try {
+        for (const montura of monturas) {
+            const { name, price, img, color, description_summary } = montura; 
+            const result = await client.query(query, [name, price, img, color, description_summary]); 
+            resultados.push(result.rows[0]);
+        }
+    } catch (err) {
+        console.error(err);
+        throw err;
+    } finally {
+        client.release();
+    }
+    return resultados;
+};
 
 const moturas = {
-    getAllMonturas
+    getAllMonturas, insertMonturas
 }
 
 module.exports = moturas;

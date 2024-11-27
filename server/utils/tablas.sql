@@ -8,11 +8,12 @@ CREATE TABLE "usuarios" (
 
 CREATE TABLE "monturas" (
   "id" SERIAL PRIMARY KEY,
-  "nombre" VARCHAR,
-  "precio" DECIMAL,
+  "name" VARCHAR,
+  "price" DECIMAL,
   "img" VARCHAR,
   "color" VARCHAR,
-  "descripcion" VARCHAR
+  "description_summary" VARCHAR,
+  "description_full" VARCHAR,
 );
 
 CREATE TABLE "citas" (
