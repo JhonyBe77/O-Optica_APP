@@ -1,4 +1,5 @@
 const puppeteer = require("puppeteer");
+const axios = require("axios"); // Realiza las solicitudes HTTP
 
 const extractProductData = async (url, browser) => {
     try {
@@ -14,9 +15,16 @@ const extractProductData = async (url, browser) => {
             productData['name'] = "Nombre no disponible";
         }
 
-        // Extracción del precio del producto
+        // Extracción del precio del producto (con ajuste de formato)
         try {
-            productData['price'] = await page.$eval('[data-testid="sale-price"], .ProductPrice_price', price => price.textContent.trim());
+            productData['price'] = await page.$eval(
+                '[data-testid="sale-price"], .ProductPrice_price', 
+                price => {
+                    const rawPrice = price.textContent.trim();
+                    // Hay que quitar el simbolo del € para que funcione "118,95 €" a "118.95"
+                    return parseFloat(rawPrice.replace('€', '').replace(',', '.').trim());
+                }
+            );
         } catch {
             productData['price'] = "Precio no disponible";
         }
@@ -64,10 +72,10 @@ const scrap = async (url) => {
         await page.goto(url, { waitUntil: 'networkidle2', timeout: 0 });
         console.log(`Navigating to ${url}...`);
 
-        // Espera unos segundos para asegurarte de que todo se haya cargado completamente
+        
         await page.waitForTimeout(5000);
 
-        // Capturar URLs de los productos
+        // URLs de las imagenes
         const tmpurls = await page.$$eval('a.ProductTile_productTile__hl1o7', links => links.map(a => 'https://www.misterspex.es' + a.getAttribute('href')));
         const urls = tmpurls.filter((link, index) => tmpurls.indexOf(link) === index);
 
@@ -91,5 +99,16 @@ const scrap = async (url) => {
     }
 };
 
+// función para enviar los datos al backend
+scrap("https://www.misterspex.es/gafas/").then(async (data) => {
+    console.log("Datos scrapeados:", data);
+    try {
+        const response = await axios.post('http://localhost:3000/montura', data); // Ruta de tu backend
+        console.log("Monturas insertadas correctamente:", response.data);
+    } catch (err) {
+        console.error("Error al insertar monturas:", err.message);
+    }
+});
+
 // Llamada a la función scrap para probar
-scrap("https://www.misterspex.es/gafas/").then(data => console.log(data));
+//scrap("https://www.misterspex.es/gafas/").then(data => console.log(data));
