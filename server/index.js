@@ -1,4 +1,5 @@
 const express = require("express"); // Importamos el paquete express
+const cors = require("cors");
 const app = express(); // Inciializar servidor con express
 const port = 3000; // Puerto a usar por el servidor
 const cookieParser = require('cookie-parser');
@@ -13,9 +14,10 @@ dotenv.config();
 // MiddlewareS                      AUTH & ROL CONTROL
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-
+g
 // Logger, formato de lo que sale por terminal
 app.use(express.json()); // Middleware para parsear el body de las peticiones
+app.use(cors());
 app.use(express.static("public")); //Middleware para servir archivos estáticos de front. CSS, JS, assets.
 
 // MiddlewareS                      MANAGE 404 ERROR
