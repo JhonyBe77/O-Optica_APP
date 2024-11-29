@@ -11,7 +11,7 @@ const App = () => {
                 <Route path="/" element={<Login />} /> {/* Login como página principal */}
             </Routes>
         </Router>
-    );
+    ); 
 };
 
 export default App;
