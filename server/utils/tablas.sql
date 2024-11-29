@@ -34,3 +34,25 @@ CREATE TABLE "favoritos" (
   CONSTRAINT fk_user_favorito FOREIGN KEY ("id_user") REFERENCES "usuarios" ("id"),
   CONSTRAINT fk_montura FOREIGN KEY ("id_montura") REFERENCES "monturas" ("id")
 );
+
+
+ALTER TABLE monturas ADD COLUMN categoria VARCHAR(20);
+
+
+UPDATE monturas
+SET categoria = 'Masculino'
+WHERE id IN (
+    SELECT id FROM monturas WHERE categoria IS NULL ORDER BY random() LIMIT 10
+);
+
+UPDATE monturas
+SET categoria = 'Femenino'
+WHERE id IN (
+    SELECT id FROM monturas WHERE categoria IS NULL ORDER BY random() LIMIT 10
+);
+
+UPDATE monturas
+SET categoria = 'Unisex'
+WHERE categoria IS NULL;
+
+SELECT * FROM monturas ORDER BY categoria;

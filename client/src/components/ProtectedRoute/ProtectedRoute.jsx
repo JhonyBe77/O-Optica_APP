@@ -5,10 +5,10 @@ const ProtectedRoute = ({ children }) => {
     const token = localStorage.getItem('token'); // Verificar si hay token
 
     if (!token) {
-        return <Navigate to="/" />; // Si no está autenticado, redirigir a Login
+        return <Navigate to="/" />; // Si no está logado, redirigir a Login
     }
 
-    return children; // Mostrar contenido si está autenticado
+    return children; // Mostrar contenido si está logado
 };
 
 export default ProtectedRoute;
