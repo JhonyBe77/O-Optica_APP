@@ -8,7 +8,7 @@ const App = () => {
         <Router>
             <Header />
             <Routes>
-                <Route path="/" element={<Login />} /> {/* Login como página principal */}
+                <Route path="/" element={<Login />} />
             </Routes>
         </Router>
     ); 

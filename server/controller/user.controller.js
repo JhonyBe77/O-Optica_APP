@@ -1,5 +1,4 @@
-const userModel = require('../models/user.model');  // Importación del modelo Product
-
+const userModel = require('../models/user.model');  
 
 const getUsers = async (req, res) => {
     let users;
