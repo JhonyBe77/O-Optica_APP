@@ -4,11 +4,11 @@ export const getAllBlogs = async () => {
   try {
     const response = await fetch(API_URL);
     if (!response.ok) {
-      throw new Error("Error al obtener los blogs");
+      throw new Error("Error al obtener las monturas");
     }
     return await response.json();
   } catch (error) {
-    console.error("Error al obtener los blogs:", error);
+    console.error("Error al obtener las monturas:", error);
     return [];
   }
 };

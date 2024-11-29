@@ -59,7 +59,7 @@ app.post("/user/login", async (req, res) => {
             return res.status(401).send("Contraseña incorrecta");
         }
 
-        // Crear token 
+        // token 
         const token = jwt.sign(
             { id: user.rows[0].id, email: user.rows[0].email, rol: user.rows[0].rol },
             process.env.JWT_SECRET,
@@ -77,12 +77,14 @@ app.get("/user/profile", verifyToken, (req, res) => {
     res.send(`Bienvenido, usuario con ID: ${req.user.id}`);
 });
 
-// Rutas existentes (usuarios y monturas)
+// Rutas existentes
 const userRoutes = require("./routes/user.routes");
 const monturaRoutes = require("./routes/montura.routes");
+const favoritosRoutes = require('./routes/favoritos.routes');
 
 app.use("/user", userRoutes);
 app.use("/montura", monturaRoutes);
+app.use('/favoritos', favoritosRoutes);
 
 // Iniciar servidor
 app.listen(port, () => {
