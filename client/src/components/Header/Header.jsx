@@ -1,13 +1,9 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 const Header = () => {
-    const navigate = useNavigate();
-
-    const handleLogout = () => {
-        localStorage.removeItem('token'); // Eliminar el token
-        navigate('/login'); // Redirigir al login
-    };
+    const { logout } = useContext(AuthContext);
 
     return (
         <header style={{ padding: '1rem', background: '#f0f0f0' }}>
@@ -21,7 +17,7 @@ const Header = () => {
                     </li>
                     <li>
                         <button
-                            onClick={handleLogout}
+                            onClick={logout}
                             style={{
                                 background: 'none',
                                 border: 'none',
