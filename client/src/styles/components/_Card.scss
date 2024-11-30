@@ -1,0 +1,63 @@
+@import "../utils/variables";
+
+.card {
+    background-color: $primary-color;
+    border: 1px solid $text-color;
+    padding: 16px;
+    box-shadow: $box-shadow;
+    font-family: $fuente;
+    max-width: 320px;
+    margin: 16px auto;
+    position: relative; 
+  
+    .card-img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 16px;
+      box-shadow: $box-shadow;
+    }
+  
+    h3 {
+      font-size: 1.5rem;
+      color: $text-color;
+      margin: 0 0 8px;
+    }
+  
+    p {
+      font-size: 1rem;
+      color: $text-color;
+      margin: 4px 0;
+  
+      &.price {
+        font-size: 2rem;
+        font-weight: bold;
+        color: $text-color;
+      }
+    }
+  
+    .favorite {
+      position: absolute; // Posiciona el botón dentro de la tarjeta
+      top: 24px; // Espaciado desde la parte superior
+      right: 24px; // Espaciado desde la derecha
+      background-color: $secondary-color;
+      color: $text-color;
+      border: 1px solid $text-color;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+  
+      &:hover {
+        background-color: darken($primary-color, 10%);
+        color: $secondary-color;
+      }
+  
+      &.active {
+        background-color: lighten($text-color, 20%);
+        color: $primary-color;
+        border-color: $secondary-color;
+      }
+    }
+  }
+  
+  
