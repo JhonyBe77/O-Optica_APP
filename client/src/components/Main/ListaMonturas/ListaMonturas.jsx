@@ -1,52 +1,63 @@
 import React, { useEffect, useState } from "react";
-import Card from "./Card/Card"; 
-import { useParams } from "react-router-dom"; 
-import { getMonturasByCategoria } from "../../../api/monturaService"; 
+import Card from "./Card/Card";
+import Search from "./Search"; // Importamos el componente Search
+import axios from "axios"; // Para las solicitudes HTTP
 import { ClockLoader } from "react-spinners";
 
-
 const ListaMonturas = () => {
-    const { categoria } = useParams(); // pilla la categoría desde la URL
-    const [monturas, setMonturas] = useState([]); // Estado para las monturas
-    const [loading, setLoading] = useState(true); // Estado para la carga
+  const [monturas, setMonturas] = useState([]); // Estado para las monturas
+  const [loading, setLoading] = useState(false); // Estado de carga
 
-    useEffect(() => {
-        const fetchMonturas = async () => {
-            try {
-                setLoading(true); // carga las monturas
-                const data = await getMonturasByCategoria(categoria); // Llamada a la API
-                setMonturas(data); // Actualizamos el estado
-            } catch (error) {
-                console.error("Error al obtener monturas:", error);
-            } finally {
-                setLoading(false); // desactiva el estado de carga
-            }
-        };
-
-        fetchMonturas();
-    }, [categoria]); // para poder cambiar la categoría
-
-    if (loading) {
-        if (loading) {
-            return (
-                <div className="spinner-container">
-                    <ClockLoader color="#FF69B4" size={50} />
-                    <p className="mensaje">Cargando monturas...</p>
-                </div>
-            );
-        }
+  // Función para buscar monturas
+  const fetchMonturas = async (searchTerm = "", categoria = "") => {
+    setLoading(true); // Activa el estado de carga
+    try {
+      const response = await axios.get("http://localhost:3000/montura/buscar", {
+        params: {
+          term: searchTerm, // Término de búsqueda
+          categoria: categoria || undefined, // Categoría, solo si está seleccionada
+        },
+      });
+      setMonturas(response.data); // Actualiza el estado con las monturas
+    } catch (error) {
+      console.error("Error al buscar monturas:", error);
+      setMonturas([]); // Vacía el estado en caso de error
+    } finally {
+      setLoading(false); // Desactiva el estado de carga
     }
-    
+  };
 
-    return (
-        <div className="lista-monturas">
-            {monturas.length > 0 ? (
-                monturas.map((montura) => <Card key={montura.id} data={montura} />)
-            ) : (
-                <p>No se encontraron monturas para la categoría "{categoria}"</p>
-            )}
+  // useEffect inicial para cargar todas las monturas
+  useEffect(() => {
+    fetchMonturas(); // Cargar todas las monturas al montar el componente
+  }, []);
+
+  return (
+    <div className="lista-monturas-container">
+      <h1>Lista de Monturas</h1>
+      {/* Contenedor del buscador */}
+      <div className="search-container">
+        <Search onSearch={fetchMonturas} />
+      </div>
+
+      {/* Mostrar estado de carga */}
+      {loading ? (
+        <div className="spinner-container">
+          <ClockLoader color="#FF69B4" size={50} />
+          <p className="mensaje">Cargando monturas...</p>
         </div>
-    );
+      ) : (
+        <div className="lista-monturas">
+          {/* Mostrar monturas */}
+          {monturas.length > 0 ? (
+            monturas.map((montura) => <Card key={montura.id} data={montura} />)
+          ) : (
+            <p className="mensaje">No se encontraron monturas</p>
+          )}
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default ListaMonturas;

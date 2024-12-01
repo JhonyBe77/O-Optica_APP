@@ -1,39 +1,48 @@
-const monturaModel = require('../models/montura.model'); // Importación del modelo Product
-const pool = require('../config/db_pgsql');
+const monturaModel = require('../models/montura.model');
 
-// Obtener todas las monturas o por ID
 const getMonturas = async (req, res) => {
-    let monturas;
-
     try {
-        if (req.query.id) {
-            monturas = await monturaModel.getUserById(req.query.id);
-        } else {
-            monturas = await monturaModel.getAllMonturas();
-        }
-        res.json({ monturas: monturas });
+        const monturas = await monturaModel.getAllMonturas();
+        res.status(200).json(monturas);
     } catch (err) {
-        res.status(500).json({ error: 'Error al obtener la montura: ' + err });
+        console.error('Error en getMonturas:', err.message);
+        res.status(500).json({ error: 'Error al obtener monturas: ' + err.message });
     }
 };
 
-// Obtener monturas por categoría
+const buscarMonturas = async (req, res) => {
+    const { term, categoria } = req.query;
+    console.log(`Parámetros recibidos: term=${term}, categoria=${categoria}`); 
+    try {
+        const monturas = await monturaModel.buscarMonturas(term, categoria);
+        if (monturas.length === 0) {
+            return res.status(404).json({ error: 'No se encontraron monturas con los filtros proporcionados' });
+        }
+        res.status(200).json(monturas);
+    } catch (err) {
+        console.error('Error en buscarMonturas:', err.message);
+        res.status(500).json({ error: 'Error al buscar monturas: ' + err.message });
+    }
+};
+
 const getMonturasByCategoria = async (req, res) => {
     const { categoria } = req.params;
-    console.log('Categoría solicitada:', categoria); // Log para depuración
+    console.log(`Categoría solicitada: ${categoria}`); 
 
     try {
-        const query = 'SELECT * FROM monturas WHERE categoria = $1';
-        const result = await pool.query(query, [categoria]);
-
-        if (result.rows.length === 0) {
+        const monturas = await monturaModel.getMonturasByCategoria(categoria);
+        if (monturas.length === 0) {
             return res.status(404).json({ error: 'No se encontraron monturas en esta categoría' });
         }
-
-        res.status(200).json(result.rows);
+        res.status(200).json(monturas);
     } catch (err) {
+        console.error('Error en getMonturasByCategoria:', err.message);
         res.status(500).json({ error: 'Error al obtener monturas por categoría: ' + err.message });
     }
 };
 
-module.exports = { getMonturas, getMonturasByCategoria };
+module.exports = {
+    getMonturas,             
+    buscarMonturas,          
+    getMonturasByCategoria,  
+};
