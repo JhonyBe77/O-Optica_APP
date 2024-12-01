@@ -1,46 +1,48 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom"; 
 import Card from "./Card/Card";
-import Search from "./Search"; // Importamos el componente Search
-import axios from "axios"; // Para las solicitudes HTTP
+import Search from "./Search";
+import axios from "axios";
 import { ClockLoader } from "react-spinners";
 
 const ListaMonturas = () => {
-  const [monturas, setMonturas] = useState([]); // Estado para las monturas
-  const [loading, setLoading] = useState(false); // Estado de carga
-
-  // Función para buscar monturas
+  const { categoria } = useParams(); 
+  const [monturas, setMonturas] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentCategoria, setCurrentCategoria] = useState(categoria || ""); 
+  
   const fetchMonturas = async (searchTerm = "", categoria = "") => {
-    setLoading(true); // Activa el estado de carga
+    setLoading(true);
     try {
       const response = await axios.get("http://localhost:3000/montura/buscar", {
         params: {
-          term: searchTerm, // Término de búsqueda
-          categoria: categoria || undefined, // Categoría, solo si está seleccionada
+          term: searchTerm,
+          categoria: categoria || undefined,
         },
       });
-      setMonturas(response.data); // Actualiza el estado con las monturas
+      setMonturas(response.data);
     } catch (error) {
       console.error("Error al buscar monturas:", error);
-      setMonturas([]); // Vacía el estado en caso de error
+      setMonturas([]);
     } finally {
-      setLoading(false); // Desactiva el estado de carga
+      setLoading(false);
     }
   };
 
-  // useEffect inicial para cargar todas las monturas
+  // para cargar monturas cuando cambia de categoría
   useEffect(() => {
-    fetchMonturas(); // Cargar todas las monturas al montar el componente
-  }, []);
+    setCurrentCategoria(categoria); 
+    fetchMonturas("", categoria); // cambia monturas según la nueva categoría
+  }, [categoria]);
 
   return (
     <div className="lista-monturas-container">
-      <h1>Lista de Monturas</h1>
-      {/* Contenedor del buscador */}
+      <h1>
+       {currentCategoria || "Todas"} 
+      </h1>
       <div className="search-container">
         <Search onSearch={fetchMonturas} />
       </div>
-
-      {/* Mostrar estado de carga */}
       {loading ? (
         <div className="spinner-container">
           <ClockLoader color="#FF69B4" size={50} />
@@ -48,7 +50,6 @@ const ListaMonturas = () => {
         </div>
       ) : (
         <div className="lista-monturas">
-          {/* Mostrar monturas */}
           {monturas.length > 0 ? (
             monturas.map((montura) => <Card key={montura.id} data={montura} />)
           ) : (

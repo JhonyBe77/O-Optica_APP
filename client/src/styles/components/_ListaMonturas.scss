@@ -18,7 +18,7 @@
   }
 
   .search-container {
-    margin-bottom: 24px; // Espacio entre el buscador y la lista
+    margin-bottom: 0px; // Espacio entre el buscador y la lista
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
@@ -33,7 +33,7 @@
       .search-input,
       .category-select {
         flex: 1;
-        max-width: 300px; // Limitar el ancho
+        max-width: 300px;
         padding: 0.5rem;
         font-size: 1rem;
         border: 1px solid $primary-color;

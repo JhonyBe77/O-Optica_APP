@@ -2,36 +2,36 @@
     display: flex;
     gap: 1rem;
     margin-bottom: 2rem;
-    font-family: $fuente; // Fuente principal
+    font-family: $fuente;
   
     .search-input {
       flex: 1;
       padding: 0.5rem;
       font-size: 1rem;
-      color: $text-color; // Color del texto
-      background-color: $secondary-color; // Fondo
-      border: 1px solid $primary-color; // Borde principal
+      color: $text-color; 
+      background-color: $secondary-color; 
+      border: 1px solid $text-color !important; 
       border-radius: 4px;
-      box-shadow: $box-shadow; // Sombra
+      box-shadow: none !important; 
   
       &:focus {
         outline: none;
-        border-color: darken($primary-color, 10%); // Borde más oscuro al enfocar
+        border-color: darken($primary-color, 10%);
       }
     }
   
     .category-select {
       padding: 0.5rem;
       font-size: 1rem;
-      color: $text-color; // Color del texto
-      background-color: $secondary-color; // Fondo
-      border: 1px solid $primary-color; // Borde principal
+      color: $text-color; 
+      background-color: $secondary-color; 
+      border: 1px solid $text-color !important; 
       border-radius: 4px;
-      box-shadow: $box-shadow; // Sombra
+      box-shadow: none !important; 
   
       &:focus {
         outline: none;
-        border-color: darken($primary-color, 10%); // Borde más oscuro al enfocar
+        border-color: darken($primary-color, 10%); 
       }
     }
   
@@ -39,20 +39,19 @@
       padding: 0.5rem 1rem;
       font-size: 1rem;
       font-weight: bold;
-      color: $secondary-color; // Texto blanco
-      background-color: $primary-color; // Fondo principal
+      color: $secondary-color; 
+      background-color: $primary-color; 
       border: none;
       border-radius: 4px;
       cursor: pointer;
-      box-shadow: $box-shadow; // Sombra
   
       &:hover {
-        background-color: lighten($primary-color, 10%); // Fondo más claro al pasar el ratón
+        background-color: lighten($primary-color, 10%); 
       }
   
       &:focus {
         outline: none;
-        box-shadow: 0 0 8px lighten($primary-color, 20%); // Brillo al enfocar
+        box-shadow: 0 0 8px lighten($primary-color, 20%); 
       }
     }
   }
