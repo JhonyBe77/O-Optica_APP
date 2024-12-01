@@ -4,6 +4,7 @@ import axios from 'axios';
 import logoQ from '../../../assets/images/LOGO-Q.png';
 // import backgroundImage from '../../../assets/images/bannerH.png';
 import backgroundPattern from '../../../assets/images/cuadricula2.png';
+import { ClockLoader } from 'react-spinners';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -79,9 +80,14 @@ const Login = () => {
                         required
                     />
                 </div>
-                <button type="submit" disabled={loading}>
+                {/* <button type="submit" disabled={loading}>
                     {loading ? 'Iniciando...' : 'Iniciar Sesión'}
-                </button>
+                </button> */}
+                {loading ? (
+                    <ClockLoader color="#fd39a2" size={77} /> // Muestra el spinner
+                ) : (
+                    <button type="submit">Iniciar Sesión</button> // Muestra el botón normal
+                )}
             </form>
             {error && <p className="error">{error}</p>}
         </div>

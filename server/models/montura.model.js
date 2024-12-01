@@ -1,4 +1,4 @@
-const queries = require('../queries/monturas.queries') // Queries SQL
+const queries = require('../queries/monturas.queries')
 const pool = require('../config/db_pgsql')
 
 const getAllMonturas = async () => {
