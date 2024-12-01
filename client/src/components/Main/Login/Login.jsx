@@ -6,7 +6,7 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false); // Estado para la carga
+    const [loading, setLoading] = useState(false); 
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -17,21 +17,20 @@ const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        setLoading(true); // Mostrar indicador de carga
+        setLoading(true); 
 
         try {
             const response = await axios.post('http://localhost:3000/user/login', { email, password });
             const { token } = response.data;
 
-            // Guardar el token en localStorage
+            // Guarda el token en localStorage
             localStorage.setItem('token', token);
 
-            // Redirigir al Home
             navigate('/');
         } catch (err) {
             setError('Credenciales incorrectas. Inténtalo de nuevo.');
         } finally {
-            setLoading(false); // Ocultar indicador de carga
+            setLoading(false); 
         }
     };
 

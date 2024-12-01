@@ -1,0 +1,109 @@
+@import "../utils/variables";
+@import "../utils/mixins";
+
+.home {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    .home-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        color: $secondary-color;
+
+        .menu-button {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: $secondary-color;
+
+            &:hover {
+                color: lighten($secondary-color, 20%);
+            }
+        }
+
+        .logo {
+            text-align: center;
+
+            h1 {
+                font-size: 2rem;
+                font-weight: bold;
+                margin: 0;
+            }
+
+            p {
+              
+                font-size: 0.8rem;
+                margin: 0;
+            }
+        }
+
+        .icons {
+            display: flex;
+            gap: 1rem;
+
+            button {
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                cursor: pointer;
+                color: $secondary-color;
+
+                &:hover {
+                    color: lighten($secondary-color, 20%);
+                }
+            }
+        }
+    }
+
+    .home-main {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 2rem;
+
+        .category-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            background-color: $primary-color;
+            color: $secondary-color;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: $fuente;
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: $box-shadow;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
+            }
+        }
+    }
+
+    @include mobile {
+        .home-header {
+            flex-direction: column;
+            gap: 0.5rem;
+
+            .icons {
+                justify-content: center;
+            }
+        }
+
+        .home-main {
+            padding: 1rem;
+
+            .category-card {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+        }
+    }
+}

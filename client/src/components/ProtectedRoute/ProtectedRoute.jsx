@@ -2,13 +2,13 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
-    const token = localStorage.getItem('token'); // Verificar si hay token
+    const token = localStorage.getItem('token'); 
 
     if (!token) {
-        return <Navigate to="/" />; // Si no está logado, redirigir a Login
+        return <Navigate to="/" />; 
     }
 
-    return children; // Mostrar contenido si está logado
+    return children; 
 };
 
 export default ProtectedRoute;

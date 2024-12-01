@@ -1,0 +1,92 @@
+@import "../utils/variables";
+@import "../utils/mixins";
+
+.login {
+  display: flex;
+  flex-direction: column; // Mantiene los elementos en columna
+  align-items: center; // Centra horizontalmente
+  justify-content: flex-start; // Coloca los elementos arriba del contenedor
+  height: 100vh; // Asegura que ocupe toda la altura de la ventana
+  padding: 2rem 0; // Añade un poco de padding arriba y abajo
+  background-color: lighten($primary-color, 40%); // Color de fondo suave
+
+  h1 {
+    font-family: $fuente;
+    color: $primary-color;
+    font-size: 2rem;
+    margin-bottom: 1.5rem; // Espaciado debajo del título
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    gap: 1rem; // Espaciado entre los elementos
+    background: $secondary-color;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: $box-shadow;
+    width: 100%;
+    max-width: 300px;
+
+    label {
+      font-family: $fuente;
+      font-size: 1rem;
+      color: $text-color;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 2px solid $primary-color;
+      border-radius: 4px;
+      font-family: $fuente;
+
+      &:focus {
+        outline: none;
+        border-color: darken($primary-color, 10%);
+        box-shadow: 0 0 5px lighten($primary-color, 30%);
+      }
+    }
+
+    button {
+      padding: 0.75rem;
+      font-size: 1rem;
+      color: $text-color;
+      background-color: $secondary-color;
+      border: 1px solid $text-color;
+      cursor: pointer;
+      font-family: $fuente;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+
+      &:disabled {
+        background-color: lighten($primary-color, 20%);
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .error {
+    margin-top: 1rem;
+    color: red;
+    font-size: 0.9rem;
+  }
+
+  @include mobile {
+    padding: 1rem;
+
+    form {
+      padding: 1.5rem;
+      width: 90%;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+}
