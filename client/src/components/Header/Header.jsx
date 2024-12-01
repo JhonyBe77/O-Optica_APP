@@ -10,7 +10,7 @@ const Header = () => {
     };
 
     return (
-        <header style={{ padding: '1rem', background: '#f0f0f0' }}>
+        <header style={{ padding: '1rem', }}>
             <nav>
                 <ul style={{ display: 'flex', gap: '1rem', listStyle: 'none' }}>
                     <li>
@@ -22,13 +22,7 @@ const Header = () => {
                     <li>
                         <button
                             onClick={handleLogout}
-                            style={{
-                                background: 'none',
-                                border: 'none',
-                                color: 'blue',
-                                cursor: 'pointer',
-                                textDecoration: 'underline',
-                            }}
+
                         >
                             Cerrar Sesión
                         </button>

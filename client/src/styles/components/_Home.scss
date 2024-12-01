@@ -1,0 +1,69 @@
+@import "../utils/variables";
+@import "../utils/mixins";
+
+.home {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    .logo {
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .home-main {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem;
+
+        .banner {
+            position: relative;
+            display: block;
+            border-radius: 10px;
+            overflow: hidden;
+            text-decoration: none;
+            box-shadow: $box-shadow;
+            transition: transform 0.3s ease;
+
+            &:hover {
+                transform: scale(1.02);
+            }
+
+            img {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+
+            .banner-title {
+                position: absolute;
+                bottom: 1rem;
+                right: 1rem;
+                background-color: rgba(0, 0, 0, 0.5);
+                color: $secondary-color;
+                padding: 0.5rem 1rem;
+                border-radius: 5px;
+                font-family: $fuente;
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
+        }
+    }
+
+    @include mobile {
+        .home-main {
+            padding: 1rem;
+            gap: 1rem;
+
+            .banner {
+                .banner-title {
+                    font-size: 1rem;
+                    padding: 0.5rem;
+                }
+            }
+        }
+    }
+}

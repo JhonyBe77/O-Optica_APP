@@ -1,0 +1,16 @@
+@import "./views/App";
+
+@import "./components/Header";
+@import "./components/Home";
+@import "./components/Favoritos";
+@import "./components/ListaMonturas";
+@import "./components/Card";
+@import "./components/Search";
+@import "./components/Login";
+
+
+
+@import "./utils/variables";
+@import "./utils/mixins";
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');

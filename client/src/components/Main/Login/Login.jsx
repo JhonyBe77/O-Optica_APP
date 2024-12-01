@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import logoQ from '../../../assets/images/LOGO-Q.png';
+// import backgroundImage from '../../../assets/images/bannerH.png';
+import backgroundPattern from '../../../assets/images/cuadricula2.png';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false); // Estado para la carga
+    const [loading, setLoading] = useState(false); 
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -17,26 +20,45 @@ const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        setLoading(true); // Mostrar indicador de carga
+        setLoading(true); 
 
         try {
             const response = await axios.post('http://localhost:3000/user/login', { email, password });
             const { token } = response.data;
 
-            // Guardar el token en localStorage
             localStorage.setItem('token', token);
-
-            // Redirigir al Home
             navigate('/');
         } catch (err) {
             setError('Credenciales incorrectas. Inténtalo de nuevo.');
         } finally {
-            setLoading(false); // Ocultar indicador de carga
+            setLoading(false); 
         }
     };
 
     return (
-        <div className="login">
+        <div
+
+            /* className="login"
+            style={{
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                height: '100vh',
+            }} */
+
+                className="login"
+                style={{
+                    backgroundImage: `url(${backgroundPattern})`,
+                    backgroundRepeat: 'repeat',
+                    backgroundSize: 'auto',
+                    backgroundPosition: 'top left', 
+                    height: '100vh',
+                }}
+        >
+            <div>
+                <img src={logoQ} alt="Logo O-Q" className="login-logo" />
+            </div>
             <h1>Iniciar Sesión</h1>
             <form onSubmit={handleLogin}>
                 <div>
