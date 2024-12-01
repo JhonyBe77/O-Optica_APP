@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import logoQ from '../../../assets/images/LOGO-Q.png';
+// import backgroundImage from '../../../assets/images/bannerH.png';
+import backgroundPattern from '../../../assets/images/cuadricula2.png';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -23,9 +26,7 @@ const Login = () => {
             const response = await axios.post('http://localhost:3000/user/login', { email, password });
             const { token } = response.data;
 
-            // Guarda el token en localStorage
             localStorage.setItem('token', token);
-
             navigate('/');
         } catch (err) {
             setError('Credenciales incorrectas. Inténtalo de nuevo.');
@@ -35,7 +36,29 @@ const Login = () => {
     };
 
     return (
-        <div className="login">
+        <div
+
+            /* className="login"
+            style={{
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                height: '100vh',
+            }} */
+
+                className="login"
+                style={{
+                    backgroundImage: `url(${backgroundPattern})`,
+                    backgroundRepeat: 'repeat',
+                    backgroundSize: 'auto',
+                    backgroundPosition: 'top left', 
+                    height: '100vh',
+                }}
+        >
+            <div>
+                <img src={logoQ} alt="Logo O-Q" className="login-logo" />
+            </div>
             <h1>Iniciar Sesión</h1>
             <form onSubmit={handleLogin}>
                 <div>

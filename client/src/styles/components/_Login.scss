@@ -1,31 +1,32 @@
-@import "../utils/variables";
-@import "../utils/mixins";
-
 .login {
   display: flex;
-  flex-direction: column; // Mantiene los elementos en columna
-  align-items: center; // Centra horizontalmente
-  justify-content: flex-start; // Coloca los elementos arriba del contenedor
-  height: 100vh; // Asegura que ocupe toda la altura de la ventana
-  padding: 2rem 0; // Añade un poco de padding arriba y abajo
-  background-color: lighten($primary-color, 40%); // Color de fondo suave
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  padding: 2rem 0;
+  background-color: lighten($primary-color, 40%);
+
+  .login-logo {
+    max-width: 150px; 
+    height: auto; 
+    margin-bottom: 1.5rem; 
+  }
 
   h1 {
     font-family: $fuente;
     color: $primary-color;
     font-size: 2rem;
-    margin-bottom: 1.5rem; // Espaciado debajo del título
+    margin-bottom: 1.5rem;
   }
 
   form {
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    gap: 1rem; // Espaciado entre los elementos
-    background: $secondary-color;
+    align-items: center;
+    gap: 1rem;
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: $box-shadow;
     width: 100%;
     max-width: 300px;
 
@@ -87,6 +88,10 @@
 
     h1 {
       font-size: 1.5rem;
+    }
+
+    .login-logo {
+      max-width: 100px;
     }
   }
 }
