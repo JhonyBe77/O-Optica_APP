@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const API_BASE_URL = 'http://localhost:3000/montura';
 
-// Obtener todas las monturas
 export const getAllMonturas = async () => {
     try {
         const response = await axios.get(`${API_BASE_URL}`);
@@ -13,7 +12,6 @@ export const getAllMonturas = async () => {
     }
 };
 
-// Obtener monturas por categoría
 export const getMonturasByCategoria = async (categoria) => {
     try {
         const response = await axios.get(`${API_BASE_URL}/categoria/${categoria}`);
