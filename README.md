@@ -1,7 +1,7 @@
 
 # ✨ O-Q - Óptica App ✨
 
-![Logo de O-Q](./public/images/readme/logo.png)
+![Logo de O-Q](https://i.imgur.com/FF5Viwd.png)
 
 Bienvenido a **Óptica O-Q**, una solución integral para ópticos y clientes. Diseñada para facilitar la navegación de monturas, gestionar favoritos y garantizar una experiencia intuitiva, la app está optimizada para dispositivos móviles y ofrece funcionalidades completas con un diseño moderno y responsivo.
 
@@ -19,7 +19,7 @@ Bienvenido a **Óptica O-Q**, una solución integral para ópticos y clientes. D
 
 ## 🌐 Arquitectura de la Aplicación
 
-![Arquitectura de la App](./public/images/readme/arquitectura.png)
+![Arquitectura de la App](https://i.imgur.com/w0tOZxP.png)
 
 Nuestra aplicación utiliza un enfoque cliente-servidor para manejar eficientemente las solicitudes entre React (Frontend) y Node.js (Backend), conectado a una base de datos PostgreSQL.
 
@@ -27,7 +27,7 @@ Nuestra aplicación utiliza un enfoque cliente-servidor para manejar eficienteme
 
 ## 📊 Modelo Relacional de la Base de Datos
 
-![Modelo Relacional](./public/images/readme/modelo-relacional.png)
+![Modelo Relacional](https://i.imgur.com/ugKEOmq.png)
 
 El modelo permite consultas eficientes para buscar monturas, añadir favoritos y gestionar datos de manera consistente.
 
@@ -54,10 +54,10 @@ El modelo permite consultas eficientes para buscar monturas, añadir favoritos y
 ## 🖼️ Interfaz y Diseño
 
 ### Pantalla de Inicio de Sesión
-![Pantalla de Inicio](./public/images/readme/interfaz-login.png)
+![Pantalla de Inicio](https://i.imgur.com/LjMF3RC.png)
 
 ### Categorías de Monturas
-![Categorías](./public/images/readme/interfaz-categorias.png)
+![Categorías](https://i.imgur.com/o35sUBT.png)
 
 El diseño es **minimalista**, enfocado en la usabilidad, con colores alegres que refuerzan el concepto de "ver la vida de color de rosa".
 
