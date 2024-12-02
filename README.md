@@ -38,7 +38,7 @@ El modelo permite consultas eficientes para buscar monturas, añadir favoritos y
 ### **Frontend**
 
 - ![React Logo](https://cdn.worldvectorlogo.com/logos/react-2.svg) **React**: Creación de componentes y manejo del estado.
-- ![React Router Logo](https://cdn.worldvectorlogo.com/logos/react-router.svg) **React Router**: Navegación entre vistas.
+- **React Router**: Navegación entre vistas.
 - **SASS**: Diseño estilizado y modular.
 - **Axios**: Conexión con el backend mediante HTTP.
 
