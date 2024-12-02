@@ -1,40 +1,64 @@
 import React, { useEffect, useState } from "react";
-import Card from "./Card/Card"; // Importamos el componente Card
-import { useParams } from "react-router-dom"; // Para capturar la categoría de la URL
-import { getMonturasByCategoria } from "../../../api/monturaService"; // API para obtener datos de monturas
+import { useParams } from "react-router-dom"; 
+import Card from "./Card/Card";
+import Search from "./Search";
+import axios from "axios";
+import { ClockLoader } from "react-spinners";
 
 const ListaMonturas = () => {
-    const { categoria } = useParams(); // Capturamos la categoría desde la URL
-    const [monturas, setMonturas] = useState([]); // Estado para las monturas
-    const [loading, setLoading] = useState(true); // Estado para la carga
+  const { categoria } = useParams(); 
+  const [monturas, setMonturas] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentCategoria, setCurrentCategoria] = useState(categoria || ""); 
+  
+  const fetchMonturas = async (searchTerm = "", categoria = "") => {
+    setLoading(true);
+    try {
+      const response = await axios.get("http://localhost:3000/montura/buscar", {
+        params: {
+          term: searchTerm,
+          categoria: categoria || undefined,
+        },
+      });
+      setMonturas(response.data);
+    } catch (error) {
+      console.error("Error al buscar monturas:", error);
+      setMonturas([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    useEffect(() => {
-        const fetchMonturas = async () => {
-            try {
-                setLoading(true); // Activamos el estado de carga
-                const data = await getMonturasByCategoria(categoria); // Llamada a la API
-                setMonturas(data); // Actualizamos el estado
-            } catch (error) {
-                console.error("Error al obtener monturas:", error);
-            } finally {
-                setLoading(false); // Desactivamos el estado de carga
-            }
-        };
+  // para cargar monturas cuando cambia de categoría
+  useEffect(() => {
+    setCurrentCategoria(categoria); 
+    fetchMonturas("", categoria); // cambia monturas según la nueva categoría
+  }, [categoria]);
 
-        fetchMonturas();
-    }, [categoria]); // Efecto se ejecuta al cambiar la categoría
-
-    if (loading) return <p>Cargando monturas...</p>; // Mensaje mientras carga
-
-    return (
-        <div className="lista-monturas">
-            {monturas.length > 0 ? (
-                monturas.map((montura) => <Card key={montura.id} data={montura} />)
-            ) : (
-                <p>No se encontraron monturas para la categoría "{categoria}"</p>
-            )}
+  return (
+    <div className="lista-monturas-container">
+      <h1>
+       {currentCategoria || "Todas"} 
+      </h1>
+      <div className="search-container">
+        <Search onSearch={fetchMonturas} />
+      </div>
+      {loading ? (
+        <div className="spinner-container">
+          <ClockLoader color="#FF69B4" size={50} />
+          <p className="mensaje">Cargando monturas...</p>
         </div>
-    );
+      ) : (
+        <div className="lista-monturas">
+          {monturas.length > 0 ? (
+            monturas.map((montura) => <Card key={montura.id} data={montura} />)
+          ) : (
+            <p className="mensaje">No se encontraron monturas</p>
+          )}
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default ListaMonturas;

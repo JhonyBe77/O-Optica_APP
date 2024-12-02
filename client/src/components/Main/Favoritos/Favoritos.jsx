@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Card from '../ListaMonturas/Card/Card'; // Reutilizamos el componente Card
+import Card from '../ListaMonturas/Card/Card'; 
 
 const Favoritos = () => {
     const [favoritos, setFavoritos] = useState([]);
@@ -10,7 +10,7 @@ const Favoritos = () => {
         const fetchFavoritos = async () => {
             try {
                 setLoading(true);
-                const token = localStorage.getItem('token'); // Recuperar el token del usuario
+                const token = localStorage.getItem('token'); 
                 const response = await axios.get('http://localhost:3000/favoritos', {
                     headers: { Authorization: `Bearer ${token}` },
                 });

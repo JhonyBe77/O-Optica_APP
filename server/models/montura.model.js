@@ -1,46 +1,58 @@
-const queries = require('../queries/monturas.queries') // Queries SQL
-const pool = require('../config/db_pgsql')
+const queries = require('../queries/monturas.queries');
+const pool = require('../config/db_pgsql');
+
+const getMonturasByCategoria = async (categoria) => {
+    const query = `SELECT * FROM monturas WHERE categoria = $1`;
+    const params = [categoria];
+
+    let client;
+    try {
+        client = await pool.connect();
+        const result = await client.query(query, params);
+        return result.rows;
+    } catch (err) {
+        console.error('Error en getMonturasByCategoria (modelo):', err.message);
+        throw err;
+    } finally {
+        client.release();
+    }
+};
 
 const getAllMonturas = async () => {
     let client, result;
     try {
         client = await pool.connect();
-        const data = await client.query(queries.getAllMonturas)
-        result = data.rows
+        const data = await client.query(queries.getAllMonturas);
+        result = data.rows;
     } catch (err) {
         console.log(err);
         throw err;
     } finally {
         client.release();
     }
-    return result
+    return result;
 };
-//isertar en base de datos
-const insertMonturas = async (monturas) => {
-    const query = `
-        INSERT INTO monturas (name, price, img, color, description_summary)
-        VALUES ($1, $2, $3, $4, $5)
-        RETURNING *;
-    `;
-    const resultados = [];
-    const client = await pool.connect();
+
+const buscarMonturas = async (term, categoria) => {
+    const query = queries.buscarMonturas(categoria); 
+    const params = [`%${term}%`];
+    if (categoria) params.push(categoria);
+
+    let client;
     try {
-        for (const montura of monturas) {
-            const { name, price, img, color, description_summary } = montura; 
-            const result = await client.query(query, [name, price, img, color, description_summary]); 
-            resultados.push(result.rows[0]);
-        }
+        client = await pool.connect();
+        const result = await client.query(query, params); 
+        return result.rows;
     } catch (err) {
-        console.error(err);
+        console.error('Error en buscarMonturas (modelo):', err.message);
         throw err;
     } finally {
         client.release();
     }
-    return resultados;
 };
 
-const moturas = {
-    getAllMonturas, insertMonturas
-}
-
-module.exports = moturas;
+module.exports = {
+    getAllMonturas,
+    buscarMonturas,
+    getMonturasByCategoria, 
+};

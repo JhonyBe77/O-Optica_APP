@@ -46,7 +46,7 @@ app.post("/user/register", async (req, res) => {
 });
 
 // Iniciar sesión
-app.post("/user/login", async (req, res) => {
+/* app.post("/user/login", async (req, res) => {
     const { email, password } = req.body;
     try {
         const user = await pool.query("SELECT * FROM usuarios WHERE email = $1", [email]);
@@ -58,7 +58,7 @@ app.post("/user/login", async (req, res) => {
         if (!validPassword) {
             return res.status(401).send("Contraseña incorrecta");
         }
-
+        console.log("aaaaaa");
         // token 
         const token = jwt.sign(
             { id: user.rows[0].id, email: user.rows[0].email, rol: user.rows[0].rol },
@@ -70,14 +70,13 @@ app.post("/user/login", async (req, res) => {
     } catch (err) {
         res.status(500).send(err.message);
     }
-});
+}); */
 
-// Ruta protegida de ejemplo
 app.get("/user/profile", verifyToken, (req, res) => {
     res.send(`Bienvenido, usuario con ID: ${req.user.id}`);
 });
 
-// Rutas existentes
+// Rutas existentesx
 const userRoutes = require("./routes/user.routes");
 const monturaRoutes = require("./routes/montura.routes");
 const favoritosRoutes = require('./routes/favoritos.routes');
@@ -86,7 +85,7 @@ app.use("/user", userRoutes);
 app.use("/montura", monturaRoutes);
 app.use('/favoritos', favoritosRoutes);
 
-// Iniciar servidor
+// Inicia el servidor
 app.listen(port, () => {
     console.log(`Servidor corriendo en: http://localhost:${port}`);
 });

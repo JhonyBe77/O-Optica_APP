@@ -1,4 +1,4 @@
-const queries = require('../queries/user.queries') // Queries SQL
+const queries = require('../queries/user.queries') 
 const pool = require('../config/db_pgsql')
 
 const getAllUsers = async () => {

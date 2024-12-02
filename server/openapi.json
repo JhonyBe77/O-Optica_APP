@@ -1,0 +1,235 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Optica API",
+    "version": "1.0.0",
+    "description": "API para la gestión de usuarios, monturas, y favoritos."
+  },
+  "paths": {
+    "/user": {
+      "get": {
+        "summary": "Obtener usuarios",
+        "responses": {
+          "200": {
+            "description": "Lista de usuarios obtenida exitosamente."
+          }
+        }
+      }
+    },
+    "/montura": {
+      "get": {
+        "summary": "Obtener todas las monturas",
+        "responses": {
+          "200": {
+            "description": "Lista de monturas obtenida exitosamente."
+          }
+        }
+      },
+      "post": {
+        "summary": "Agregar monturas",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "price": {
+                      "type": "number"
+                    },
+                    "img": {
+                      "type": "string"
+                    },
+                    "color": {
+                      "type": "string"
+                    },
+                    "description_summary": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Monturas agregadas exitosamente."
+          }
+        }
+      }
+    },
+    "/user/register": {
+      "post": {
+        "summary": "Registrar usuario",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "rol": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuario registrado exitosamente."
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "summary": "Iniciar sesión",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sesión iniciada exitosamente."
+          }
+        }
+      }
+    },
+    "/user/profile": {
+      "get": {
+        "summary": "Obtener perfil de usuario",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Bearer {token}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Perfil de usuario obtenido exitosamente."
+          }
+        }
+      }
+    },
+    "/favoritos": {
+      "post": {
+        "summary": "Agregar a favoritos",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Bearer {token}"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id_montura": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Favorito agregado exitosamente."
+          }
+        }
+      },
+      "get": {
+        "summary": "Listar favoritos",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Bearer {token}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de favoritos obtenida exitosamente."
+          }
+        }
+      }
+    },
+    "/favoritos/{id}": {
+      "delete": {
+        "summary": "Borrar favorito",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Bearer {token}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Favorito eliminado exitosamente."
+          }
+        }
+      }
+    }
+  }
+}
