@@ -1,4 +1,4 @@
-const pool = require('../config/db_pgsql'); // Conexión a la base de datos
+const pool = require('../config/db_pgsql');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 

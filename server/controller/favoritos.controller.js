@@ -28,7 +28,7 @@ const getFavorites = async (req, res) => {
     }
 };
 
-
+//PAra eliminar favoritos
 const removeFavorite = async (req, res) => {
     const { id_montura } = req.params;
     const userId = req.user.id; // ID del usuario autenticado

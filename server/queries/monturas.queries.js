@@ -4,6 +4,9 @@ const queries = {
 
     getAllMonturas: `SELECT * FROM monturas`,
 
+    // Consulta para buscar monturas por nombre o color.
+    // Uso ILIKE para que la búsqueda sea insensible a mayúsculas y minúsculas.
+    // Si se pasa una categoría, filtro las monturas que coinciden con ella.
     buscarMonturas: (categoria) => {
         let query = `
             SELECT * FROM monturas
