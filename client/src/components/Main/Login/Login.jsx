@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logoQ from '../../../assets/images/LOGO-Q.png';
+//prueba de imagen para banner de categoría
 // import backgroundImage from '../../../assets/images/bannerH.png';
 import backgroundPattern from '../../../assets/images/cuadricula2.png';
 import { ClockLoader } from 'react-spinners';
@@ -38,7 +39,7 @@ const Login = () => {
 
     return (
         <div
-
+            // primer spinner
             /* className="login"
             style={{
                 backgroundImage: `url(${backgroundImage})`,
@@ -84,9 +85,9 @@ const Login = () => {
                     {loading ? 'Iniciando...' : 'Iniciar Sesión'}
                 </button> */}
                 {loading ? (
-                    <ClockLoader color="#fd39a2" size={77} /> // Muestra el spinner
+                    <ClockLoader color="#fd39a2" size={77} /> // spinner reloj
                 ) : (
-                    <button type="submit">Iniciar Sesión</button> // Muestra el botón normal
+                    <button type="submit">Iniciar Sesión</button> 
                 )}
             </form>
             {error && <p className="error">{error}</p>}

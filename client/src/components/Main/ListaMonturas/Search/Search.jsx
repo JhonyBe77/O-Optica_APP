@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
 const Search = ({ onSearch }) => {
-  const [searchTerm, setSearchTerm] = useState(""); // Estado para el término de búsqueda
-  const [categoria, setCategoria] = useState(""); // Estado para la categoría
+  const [searchTerm, setSearchTerm] = useState(""); 
+  const [categoria, setCategoria] = useState(""); 
 
-  // Función para manejar el envío del formulario
+  // Función para enviar la busqueda del search
   const handleSearch = (e) => {
-    e.preventDefault(); // Evitar recargar la página
-    onSearch(searchTerm, categoria); // Llamar a la función pasada desde el padre
+    e.preventDefault(); 
+    onSearch(searchTerm, categoria); 
   };
 
   return (
@@ -16,12 +16,12 @@ const Search = ({ onSearch }) => {
         type="text"
         placeholder="Buscar por nombre o color..."
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)} // Actualiza el estado del término
+        onChange={(e) => setSearchTerm(e.target.value)} 
         className="search-input"
       />
       <select
         value={categoria}
-        onChange={(e) => setCategoria(e.target.value)} // Actualiza el estado de la categoría
+        onChange={(e) => setCategoria(e.target.value)} 
         className="category-select"
       >
         <option value="">Todas las categorías</option>
